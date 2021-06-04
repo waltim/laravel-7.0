@@ -41,8 +41,17 @@
 {{-- @for ($i = ;isset($fornecedores[$i]); $i++) utilizando um for tradicional, basta dar isset passando o $i identificador como chave.
 @endfor --}}
 
-@foreach ($fornecedores as $fornecedor)
+{{-- @php $i = 0 @endphp
+@while ($fornecedores[$i]) while com o blade é muito feio. Parece uma gambiarra escrota.
+    @php $i++ @endphp
+@endwhile --}}
 
+
+{{-- @forelse faz o mesmo que o @foreach, mas se o array estiver vazio, vc pode passar para uma condição @empty dentro do laço, facilitando a implementação das telas de visão para os usuários quando você não tiver itens a serem listados.--}}
+
+@forelse($fornecedores as $indice => $fornecedor) {{-- @foreach faz uma copia do array original. Qualquer alteração deve ser feita no array original. ex: $fornecedores[$indice] = alteração que se deseja fazer. --}}
+    {{-- Iteração atual (ID): {{$loop->iteration}} temos também first e last, para avaliar a primeira e ultima iteração do loop. temos também count, que retorna o total de registros iterados.
+    <br> --}}
     Fornecedor: {{ $fornecedor['nome'] }}
     <br>
     Status: {{ $fornecedor['status'] }}
@@ -65,6 +74,8 @@
         @default
             Não identificado.
     @endswitch
-    <br><br><br>
-@endforeach
+    <hr>
+@empty
+    Não existem fornecedores cadastrados!!.
+@endforelse
 @endisset
