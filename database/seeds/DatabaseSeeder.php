@@ -12,5 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $this->call(FornecedorSeeder::class);
+        $this->call(SiteContatoSeeder::class);
     }
+
+    // rodar o comando para executar apenas uma única classe seeder: php artisan db:seed --class=SiteContatoSeeder
 }
