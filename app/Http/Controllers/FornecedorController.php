@@ -32,6 +32,8 @@ class FornecedorController extends Controller
             ],
         ];
 
+        // $fornecedores = \App\Fornecedor::all();
+
         // echo isset($fornecedores) ? "a variável fornecedores foi declarada!" : "a variável não foi declarada";
 
         // echo $fornecedores ?? "a variável não foi declarada"; Já aplica isset e empty ba variável.
