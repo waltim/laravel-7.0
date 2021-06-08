@@ -9,6 +9,8 @@ class ContatoController extends Controller
 {
     public function contato(Request $request)
     {
+        //uma das formas de persistir dados no banco;
+
         // $contato = new SiteContato();
         // $contato->nome = $request->input('name');
         // $contato->email = $request->input('email');
@@ -17,17 +19,24 @@ class ContatoController extends Controller
         // $contato->mensagem = $request->input('mensagem');
 
         // $contato->create($request->all());
-        return view('site.contato');
+
+        $motivos = [
+            1 => 'Dúvida',
+            2 => 'Elogio',
+            3 => 'Reclamação'
+        ];
+
+        return view('site.contato',['motivos'=>$motivos]);
     }
 
     public function salvar(Request $request)
     {
         $request->validate([
-            'nome'=> 'required',
+            'nome'=> 'required|min:5|max:50',
             'telefone' => 'required',
             'motivo' => 'required',
             'email' => 'required',
-            'mensagem' => 'required'
+            'mensagem' => 'required|max:2000'
         ]);
     }
 }
