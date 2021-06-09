@@ -14,6 +14,9 @@ class AlterSiteContatosMotivoContatosTable extends Migration
     public function up()
     {
         Schema::table('site_contatos', function (Blueprint $table) {
+
+            // outra maneira de fazer isso é criar uma nova coluna na tabela e mapear todos os dados para a nova tabela como no exemplo abaixo.
+            // DB::statement('update site_contatos set motivo_contato_id = motivo');
             DB::statement('ALTER TABLE site_contatos MODIFY motivo BIGINT(20) UNSIGNED');
             $table->renameColumn('motivo', 'motivo_contato_id');
             $table->foreign('motivo_contato_id')->references('id')->on('motivo_contatos');
