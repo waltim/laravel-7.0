@@ -8,14 +8,12 @@
     <br>
     <input name="email" value="{{ old('email') }}" type="text" placeholder="E-mail" class="{{ $borda }}">
     <br>
-    <select name="motivo" class="{{ $borda }}">
+    <select name="motivo_contato_id" class="{{ $borda }}">
         <option value="">Qual o motivo do contato?</option>
-        @foreach ($motivos as $key => $motivo)
-            <option value="{{ $key }}" {{ old('motivo') == $key ? 'selected' : '' }}>{{ $motivo }}
+        @foreach ($motivos as $motivo)
+            <option value="{{ $motivo->id }}" {{ old('motivo_contato_id') == $motivo->id ? 'selected' : '' }}>{{ $motivo->descricao }}
             </option>
         @endforeach
-        {{-- <option value="2" {{ old('motivo') == 2 ? 'selected' : '' }}>Elogio</option>
-        <option value="3" {{ old('motivo') == 3 ? 'selected' : '' }}>Reclamação</option> --}}
     </select>
     <br>
     <textarea name="mensagem" class="{{ $borda }}"
