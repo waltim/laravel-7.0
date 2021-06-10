@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\LogAcesso;
 use Closure;
+use Facade\FlareClient\Http\Response;
 
 class LogAcessoMiddleware
 {
@@ -15,6 +17,16 @@ class LogAcessoMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        // dd($request);
+        // return $next($request);
+        $ip = $request->server->get('REMOTE_ADDR');
+        $route = $request->getRequestUri();
+        LogAcesso::create(['log' => "O ip: $ip passou pela rota: $route."]);
+
+        // dessa forma é possível alterar a resposta de retorno do middleware;
+        $resposta = $next($request);
+
+        return $resposta;
+        // return Response('Chegamos no middleware e finalizamos aqui.');
     }
 }
