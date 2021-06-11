@@ -27,8 +27,16 @@ Route::prefix('/app')->middleware('autenticacao:padrao,visitante')->group(functi
     Route::get('/home', 'HomeController@index')->name('app.home');
     Route::get('/sair', 'LoginController@sair')->name('app.sair');
     Route::get('/clientes', 'ClienteController@index')->name('app.clientes');
+
     Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
-    Route::get('/produtos', 'ProdutoController@index')->name('app.produtos');
+    Route::post('/fornecedores/listar', 'FornecedorController@listar')->name('app.fornecedores.listar');
+    Route::get('/fornecedores/listar', 'FornecedorController@listar')->name('app.fornecedores.listar');
+    Route::get('/fornecedores/adicionar/{msg?}', 'FornecedorController@adicionar')->name('app.fornecedores.adicionar');
+    Route::post('/fornecedores/adicionar', 'FornecedorController@adicionar')->name('app.fornecedores.adicionar');
+    Route::get('/fornecedores/editar/{id}/{msg?}', 'FornecedorController@editar')->name('app.fornecedores.editar')->where('id', '[0-9]+');
+    Route::get('/fornecedores/excluir/{id}', 'FornecedorController@excluir')->name('app.fornecedores.excluir')->where('id', '[0-9]+');
+
+    Route::resource('produto', 'ProdutoController');
 });
 
 
